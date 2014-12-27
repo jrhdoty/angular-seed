@@ -7,9 +7,9 @@ module.exports.run = function(){
 var app = express();
 
 app.use( reloader() );
-app.use( express.static( path.join( './', 'bower_components')));
-app.use( express.static( path.join( './', 'src') ) );
-app.use( express.static( path.join( './', 'demoApp' ) ) );
+app.use( express.static( path.join( './', 'public', 'lib')));
+app.use( express.static( path.join( './', 'public', 'dist') ) );
+// app.use( express.static( path.join( './', 'demoApp' ) ) );
 
 
 app.listen( 9000, '127.0.0.1', function(){

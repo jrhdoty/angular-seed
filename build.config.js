@@ -4,7 +4,8 @@ module.exports = {
   dist: {
     dir: 'public/dist',
     index: 'public/index.html',
-    styles: 'public/dist/styles'
+    styles: 'public/dist/styles/**.*css',
+    app:'public/dist/app.js'
   },
 
   src: {
@@ -12,7 +13,7 @@ module.exports = {
       'public/modules/**/*.module.js',
       'public/modules/**/*.js',
       '!public/modules/**/*.spec.js',
-      'public/modules/ngEocities.js'
+      'public/app.js'
       ],
 
     jsunit: ['public/**/*.spec.js'],

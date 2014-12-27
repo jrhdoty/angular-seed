@@ -51,8 +51,9 @@ gulp.task('uglify', ['preMin'], function(){
 
 gulp.task('inject', function(){
   //sources
-  var scripts = gulp.src(paths.src.js, {read:false});
-  // var styles  = gulp.src(paths.demo.styles, {read:false});
+  // var scripts = gulp.src(paths.src.js, {read:false});
+  var scripts = gulp.src(paths.dist.app);
+  var styles  = gulp.src(paths.dist.styles, {read:false});
 
   //target
   var target  = gulp.src(paths.dist.index);
@@ -60,29 +61,31 @@ gulp.task('inject', function(){
   return target
   //inject js
   .pipe($.inject(scripts, {
-    addRootSlash: true,
-    ignorePath: 'src',
+    addRootSlash: false,
+    ignorePath: 'public/dist',
     name:'scripts',
-    relative: false,
   }))
 
   //inject css
   .pipe($.inject(styles, {
     addRootSlash: false,
-    relative: true,
+    ignorePath: 'public/dist',
     name: 'styles'
   }))
 
   //inject bower components
-  .pipe($.inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+  .pipe($.inject(gulp.src(bowerFiles(), {read: false}), 
+    {name: 'bower',
+    ignorePath: 'public/lib',
+  }))
 
-  .pipe(gulp.dest(paths.demo.dir));
+  .pipe(gulp.dest(paths.dist.dir));
 });
 
 gulp.task('watch', function(){
   gulp.watch(paths.src.js, ['lint'], $.livereload.changed);
   gulp.watch(paths.src.styles, ['styles'], $.livereload.changed);
-  gulp.watch(paths.demo.index, $.livereload.changed);
+  gulp.watch(paths.dist.index, $.livereload.changed);
 });
 
 //run server for demo app and watch files
@@ -95,7 +98,7 @@ gulp.task('serve', ['server'], function(){
   var options = {
     url: 'http://localhost:9000',
   };
-  gulp.src('./demoApp/index.html')
+  gulp.src('./public/dist/index.html')
     .pipe($.open('', options));
 });
 

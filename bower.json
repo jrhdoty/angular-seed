@@ -1,7 +1,5 @@
 {
   "name": "doty-angular-seed",
-  "version": "0.0.0",
-  "homepage": "https://github.com/jrhdoty/angular-seed",
   "authors": [
     "John Doty <jrhdoty@gmail.com>"
   ],
@@ -10,7 +8,6 @@
     "prototype",
     "angular"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",

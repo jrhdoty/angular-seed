@@ -1,7 +1,7 @@
 describe('Unit: blink', function(){
   var scope, element, $timeout, isolateScope;
 
-  beforeEach(module('ngEocities.blink'));
+  beforeEach(module('app.blink'));
 
   beforeEach(inject(function($rootScope, $compile, _$timeout_){
     scope = $rootScope.$new();

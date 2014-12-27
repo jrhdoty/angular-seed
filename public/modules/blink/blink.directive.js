@@ -1,5 +1,5 @@
 (function(angular){
-  angular.module('ngEocities.blink')
+  angular.module('app.blink')
   .directive('blink', blink);
 
   /*@inject*/
