@@ -1,0 +1,25 @@
+{
+  "name": "doty-angular-seed",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jrhdoty/angular-seed",
+  "authors": [
+    "John Doty <jrhdoty@gmail.com>"
+  ],
+  "description": "A simple seed project for rapid prototyping",
+  "keywords": [
+    "prototype",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.26"
+  }
+}
