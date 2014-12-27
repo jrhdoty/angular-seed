@@ -4,6 +4,7 @@ var path      = require('path');
 
 module.exports.run = function(){
 
+var port = process.env.PORT || 9000;
 var app = express();
 
 // app.use( reloader() );
@@ -12,7 +13,7 @@ app.use( express.static( path.join( './', 'public', 'dist') ) );
 // app.use( express.static( path.join( './', 'demoApp' ) ) );
 
 
-app.listen( 9000, '127.0.0.1', function(){
+app.listen(port, function(){
   console.log('Server Listening on 9000');
   console.log('Serving demo/index.html');
 
