@@ -1,31 +1,24 @@
 module.exports = {
-  dist: 'dist',
-
   compile_dir: 'bin',
 
-  demo: {
-    dir: 'demoApp',
-    index: 'demoApp/index.html',
-    styles: 'demoApp/styles/*.css'
+  dist: {
+    dir: 'public/dist',
+    index: 'public/index.html',
+    styles: 'public/dist/styles'
   },
 
-  app_files: {
+  src: {
     js: [
-      'src/**/*.module.js',
-      'src/**/*.js',
-      '!src/**/*.spec.js',
-      'src/ngEocities.js'
+      'public/modules/**/*.module.js',
+      'public/modules/**/*.js',
+      '!public/modules/**/*.spec.js',
+      'public/modules/ngEocities.js'
       ],
-    jsunit: ['src/**/*.spec.js'],
+
+    jsunit: ['public/**/*.spec.js'],
     
     styles: [
-      'src/**/*.styl'
-    ]
-  },
-
-  vendor_files: {
-    js: [
-      '/angular/angular.js'
+      'public/**/*.styl'
     ]
   }
 };   

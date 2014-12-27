@@ -1,21 +1,20 @@
-var gulp   = require('gulp');
-    $      = require('gulp-load-plugins')();
-    server = require('./demoApp/server.js');
-    stylus = require('gulp-stylus');
-    paths  = require('./build.config.js');
+var gulp   = require('gulp'),
+    $      = require('gulp-load-plugins')(),
+    bowerFiles = require('main-bower-files'),
+    server = require('./server.js'),
+    stylus = require('gulp-stylus'),
+    paths  = require('./build.config.js'),
     karma = require('karma').server;
 
 
 gulp.task('styles', function() {
-  gulp.src(paths.app_files.styles)
+  gulp.src(paths.src.styles)
     .pipe(stylus())
-    .pipe(gulp.dest(paths.demo.dir))
-    .pipe(gulp.dest(paths.dist));
-
+    .pipe(gulp.dest(paths.dist.dir));
 });
 
 gulp.task('lint', function(){
-  return gulp.src(paths.app_files.js)
+  return gulp.src(paths.src.js)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.notify({message: 'Linting Done'}))
@@ -23,40 +22,40 @@ gulp.task('lint', function(){
 });
 
 gulp.task('concat', function(){
-  return gulp.src(paths.app_files.js)
-    .pipe($.concat('ngEocities.js'))
-    .pipe(gulp.dest(paths.dist));
+  return gulp.src(paths.src.js)
+    .pipe($.concat('app.js'))
+    .pipe(gulp.dest(paths.dist.dir));
 });
 
 gulp.task('minify', function(){
-  return gulp.src(paths.app_files.js)
-    .pipe($.concat('ngEocities.min.js'))
-    .pipe(gulp.dest(paths.dist));
+  return gulp.src(paths.src.js)
+    .pipe($.concat('app.min.js'))
+    .pipe(gulp.dest(paths.dist.dir));
 });
 
 //annotate dependencies so don't need explicit array syntax
 gulp.task('preMin', ['minify'], function(){
-  return gulp.src('./dist/ngEocities.min.js')
+  return gulp.src('./public/dist/app.min.js')
     .pipe($.ngAnnotate())
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.dist.dir))
     .pipe($.notify({message: 'Min done'}));
 
 });
 
 gulp.task('uglify', ['preMin'], function(){
-  return gulp.src('./dist/ngEocities.min.js')
+  return gulp.src('./public/dist/app.min.js')
     .pipe($.uglify())
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.dist.dir))
     .pipe($.notify({message: 'Build Done'}));
 });
 
 gulp.task('inject', function(){
   //sources
-  var scripts = gulp.src(paths.app_files.js, {read:false});
-  var styles  = gulp.src(paths.demo.styles, {read:false});
+  var scripts = gulp.src(paths.src.js, {read:false});
+  // var styles  = gulp.src(paths.demo.styles, {read:false});
 
   //target
-  var target  = gulp.src(paths.demo.index);
+  var target  = gulp.src(paths.dist.index);
 
   return target
   //inject js
@@ -74,12 +73,15 @@ gulp.task('inject', function(){
     name: 'styles'
   }))
 
+  //inject bower components
+  .pipe($.inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+
   .pipe(gulp.dest(paths.demo.dir));
 });
 
 gulp.task('watch', function(){
-  gulp.watch(paths.app_files.js, ['lint'], $.livereload.changed);
-  gulp.watch(paths.app_files.styles, ['styles'], $.livereload.changed);
+  gulp.watch(paths.src.js, ['lint'], $.livereload.changed);
+  gulp.watch(paths.src.styles, ['styles'], $.livereload.changed);
   gulp.watch(paths.demo.index, $.livereload.changed);
 });
 
