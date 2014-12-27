@@ -1,12 +1,12 @@
 var express   = require('express');
 var path      = require('path');
+var port      = process.env.PORT || 9000;
 // var reloader  = require('connect-livereload');
 
 module.exports.run = function(){
 
-var port = process.env.PORT || 9000;
 var app = express();
-
+console.log('PORT IS: ', port);
 // app.use( reloader() );
 app.use( express.static( path.join( './', 'public', 'lib')));
 app.use( express.static( path.join( './', 'public', 'dist') ) );
@@ -14,7 +14,7 @@ app.use( express.static( path.join( './', 'public', 'dist') ) );
 
 
 app.listen(port, function(){
-  console.log('Server Listening on 9000');
+  console.log('Server Listening on PORT', port);
   console.log('Serving demo/index.html');
 
   console.log('Serving localhost:9000/dist as /');
