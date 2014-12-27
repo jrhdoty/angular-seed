@@ -1,12 +1,12 @@
 var express   = require('express');
 var path      = require('path');
-var reloader  = require('connect-livereload');
+// var reloader  = require('connect-livereload');
 
 module.exports.run = function(){
 
 var app = express();
 
-app.use( reloader() );
+// app.use( reloader() );
 app.use( express.static( path.join( './', 'public', 'lib')));
 app.use( express.static( path.join( './', 'public', 'dist') ) );
 // app.use( express.static( path.join( './', 'demoApp' ) ) );
