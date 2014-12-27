@@ -1,12 +1,11 @@
 var express   = require('express');
 var path      = require('path');
-var port      = process.env.PORT || 9000;
 // var reloader  = require('connect-livereload');
 
-module.exports.run = function(){
-
+module.exports.run = function(port){
+port = port || 9000;
 var app = express();
-console.log('PORT IS: ', port);
+
 // app.use( reloader() );
 app.use( express.static( path.join( './', 'public', 'lib')));
 app.use( express.static( path.join( './', 'public', 'dist') ) );
