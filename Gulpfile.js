@@ -17,8 +17,7 @@ gulp.task('lint', function(){
   return gulp.src(paths.src.js)
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.notify({message: 'Linting Done'}))
-    .pipe($.livereload());
+    .pipe($.notify({message: 'Linting Done'}));
 });
 
 gulp.task('concat', function(){
@@ -83,9 +82,9 @@ gulp.task('inject', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(paths.src.js, ['lint'], $.livereload.changed);
-  gulp.watch(paths.src.styles, ['styles'], $.livereload.changed);
-  gulp.watch(paths.dist.index, $.livereload.changed);
+  gulp.watch(paths.src.js, ['lint']);
+  gulp.watch(paths.src.styles, ['styles']);
+  gulp.watch(paths.dist.index);
 });
 
 //run server for demo app and watch files
